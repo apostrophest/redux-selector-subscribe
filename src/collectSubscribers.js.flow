@@ -1,0 +1,12 @@
+// @flow
+
+import type { Store } from 'redux';
+
+declare interface SelectorSubscriber<S, V> {
+    selector: (state: S) => V,
+    onChange: (newValue: V, oldValue?: V) => void
+};
+
+declare type ReduxSubscriber<S> = (store: Store<S, *>) => void;
+
+declare export default function collectSubscribers<S>(...subscriptions: SelectorSubscriber<S, *>[]): ReduxSubscriber<S>;
